@@ -41,13 +41,14 @@ jobs:
           script: |
             echo "Deploying application"
 
+            cd ~
             cd try-deployment
             git pull
 
             echo "Building docker image"
             docker build -t try-deployment .
 
-            echo "Stopping container"
+            echo "Stopping already running container"
             docker stop try-deployment || true
             docker rm try-deployment || true
 

@@ -43,7 +43,6 @@ jobs:
             cd try-deployment
             git pull
 
-            echo "Building docker image"
             docker build -t try-deployment .
             
             docker stop try-deployment || true

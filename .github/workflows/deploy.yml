@@ -39,18 +39,14 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            echo "Deploying application"
-
             cd ~
             cd try-deployment
             git pull
 
             echo "Building docker image"
             docker build -t try-deployment .
-
-            echo "Stopping already running container"
+            
             docker stop try-deployment || true
             docker rm try-deployment || true
 
-            echo "Starting container"
             docker run -d -p 80:5000 --name try-deployment try-deployment
